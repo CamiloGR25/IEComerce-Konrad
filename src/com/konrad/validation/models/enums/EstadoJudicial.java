@@ -1,4 +1,6 @@
 package com.konrad.validation.models.enums;
 
-public class EstadoJudicial {
+public enum EstadoJudicial {
+    REQUERIDO,
+    NO_REQUERIDO
 }

@@ -1,4 +1,8 @@
 package com.konrad.validation.models.enums;
 
-public class EstadoSolicitud {
+public enum EstadoSolicitud {
+    PENDIENTE,
+    APROBADA,
+    DEVUELTA,
+    RECHAZADA
 }

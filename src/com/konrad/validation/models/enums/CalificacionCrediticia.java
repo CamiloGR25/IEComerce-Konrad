@@ -1,4 +1,7 @@
 package com.konrad.validation.models.enums;
 
-public class CalificacionCrediticia {
+public enum CalificacionCrediticia {
+    ALTA,
+    BAJA,
+    ADVERTENCIA
 }

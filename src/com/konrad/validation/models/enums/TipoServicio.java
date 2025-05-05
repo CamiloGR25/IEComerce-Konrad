@@ -1,4 +1,7 @@
 package com.konrad.validation.models.enums;
 
-public class TipoServicio {
+public enum TipoServicio {
+    DATACREDITO,
+    CIFIN,
+    POLICIA
 }
