@@ -1,4 +1,6 @@
 package com.konrad.validation.ports;
 
-public class IServicioExterno {
+
+public interface IServicioExterno<T> {
+    T consultar(String identificacion);
 }
