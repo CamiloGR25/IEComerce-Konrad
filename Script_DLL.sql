@@ -148,3 +148,62 @@ CREATE TABLE Notificacion (
   FOREIGN KEY (usuario_id) REFERENCES Usuario(id_usuario)
     ON DELETE CASCADE
 ) ENGINE=InnoDB;
+
+-- Datos de prueba
+
+USE konrad_ecommerce;
+
+-- 1. Usuarios de prueba
+INSERT INTO Usuario (identificacion, nombres, apellidos, email, password_hash, role, direccion, ciudad, pais, telefono) VALUES
+('1234567890','Director','Comercial','director@konrad.com','hashed_pw1','DIRECTOR','Av. Siempre Viva 123','Bogotá','Colombia','3200000000'),
+('0987654321','Vendedor','Prueba','vendedor@konrad.com','hashed_pw2','VENDEDOR','Calle 2','Medellín','Colombia','3100000000'),
+('1122334455','Comprador','Prueba','comprador@konrad.com','hashed_pw3','COMPRADOR','Calle 3','Cali','Colombia','3200000001');
+
+-- 2. Solicitudes pendientes (punto 2)
+INSERT INTO Solicitud (usuario_id, fecha_solicitud, estado) VALUES
+(2,'2025-05-20 10:00:00','PENDIENTE'),
+(2,'2025-05-21 11:30:00','PENDIENTE');
+
+-- 3. Categorías y subcategorías
+INSERT INTO Categoria (nombre) VALUES
+('Electrónica'),
+('Hogar');
+
+INSERT INTO Subcategoria (categoria_id, nombre) VALUES
+(1,'Smartphones'),
+(1,'Laptops'),
+(2,'Muebles');
+
+-- 4. Productos de ejemplo
+INSERT INTO Producto (vendedor_id, subcategoria_id, marca, original, color, tamano, peso, talla, estado, cantidad, precio, descripcion) VALUES
+(2, 1, 'Samsung', TRUE, 'Negro', '6.1"', 0.17, NULL, 'Nuevo', 10, 1500.00, 'Smartphone de prueba'),
+(2, 2, 'Dell',    TRUE, 'Plateado','15.6"', 2.50, NULL, 'Nuevo',  5, 3200.00, 'Laptop de prueba');
+
+-- 5. Carrito de un comprador
+INSERT INTO Carrito (usuario_id) VALUES
+(3);
+
+-- Asumimos id_carrito = 1
+INSERT INTO CarritoItem (carrito_id, producto_id, cantidad) VALUES
+(1, 1, 1);
+
+-- 6. Pedido y sus items
+INSERT INTO Pedido (usuario_id, fecha_pedido, total, estado, direccion_envio, tipo_envio) VALUES
+(3, '2025-05-22 14:00:00', 1500.00, 'PENDIENTE', 'Calle 4', 'Domicilio');
+
+-- Asumimos id_pedido = 1
+INSERT INTO PedidoItem (pedido_id, producto_id, cantidad, precio_unitario) VALUES
+(1, 1, 1, 1500.00);
+
+-- 7. Pago de ejemplo
+INSERT INTO Pago (pedido_id, metodo_pago, estado_pago, numero_aprobacion) VALUES
+(1, 'TARJETA', 'COMPLETADO', 'APROVED123');
+
+-- 8. Suscripción de vendedor
+INSERT INTO Suscripcion (usuario_id, fecha_inicio, fecha_fin, tipo_periodo, estado) VALUES
+(2, '2025-05-01', '2025-05-31', 'MENSUAL', 'ACTIVA');
+
+-- 9. Notificaciones de prueba
+INSERT INTO Notificacion (usuario_id, fecha, tipo, mensaje, leido) VALUES
+(2, '2025-05-21 12:00:00', 'INFO', 'Tu suscripción está activa', FALSE),
+(3, '2025-05-22 14:05:00', 'INFO', 'Compra recibida, pedido #1', FALSE);
